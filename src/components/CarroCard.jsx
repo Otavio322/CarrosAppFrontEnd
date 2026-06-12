@@ -1,9 +1,10 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 
 const TIPO_LABEL = {
   eletrico: { label: "⚡ Elétrico", cor: "#4CAF50" },
   gasolina: { label: "⛽ Gasolina", cor: "#FF9800" },
   diesel: { label: "🛢️ Diesel", cor: "#795548" },
+  hibrido: { label: "⛽ + ⚡ Híbrido", cor: "#0000FF"},
 };
 
 export default function CarroCard({ carro, onEditar, onDeletar }) {
@@ -11,6 +12,19 @@ export default function CarroCard({ carro, onEditar, onDeletar }) {
 
   return (
     <View style={styles.card}>
+      {carro.imageUrl ? (
+        <Image
+          source={{ uri: carro.imageUrl }}
+          style={styles.imagem}
+          resizeMode="cover"
+        />
+      ) : (
+        <View style={styles.imagemPlaceholder}>
+          <Text style={styles.placeholderIcon}>🚗</Text>
+        </View>
+      )}
+
+
       <View style={styles.info}>
         <Text style={styles.nome}>{carro.nome}</Text>
         <Text style={styles.modelo}>{carro.modelo}</Text>
@@ -47,6 +61,19 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#2A2D3A",
   },
+
+  imagem: {
+    width: 90,
+    height: 90,
+  },
+  imagemPlaceholder: {
+    width: 90,
+    height: 90,
+    backgroundColor: "#0F1117",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  placeholderIcon: { fontSize: 30 },
   info: { flex: 1 },
   nome: { color: "#fff", fontSize: 17, fontWeight: "700" },
   modelo: { color: "#aaa", fontSize: 13, marginTop: 2 },

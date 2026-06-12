@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {
+    Image,
     StyleSheet,
     Text,
     TextInput,
@@ -7,13 +8,14 @@ import {
     View,
 } from "react-native";
 
-const TIPOS = ["eletrico", "gasolina", "diesel"];
+const TIPOS = ["eletrico", "gasolina", "diesel", "hibrido"];
 const TIPO_LABEL = {
   eletrico: "⚡ Elétrico",
   gasolina: "⛽ Gasolina",
   diesel: "🛢️ Diesel",
+  hibrido: "⛽ + ⚡ Híbrido"
 };
-const EMPTY = { nome: "", modelo: "", tipo: "gasolina" };
+const EMPTY = { nome: "", modelo: "", tipo: "gasolina", iamgeURl: "" };
 
 export default function CarroForm({ onSalvar, carroEditando, onCancelar }) {
   const [form, setForm] = useState(EMPTY);
@@ -45,6 +47,16 @@ export default function CarroForm({ onSalvar, carroEditando, onCancelar }) {
         placeholderTextColor="#666"
         value={form.modelo}
         onChangeText={(v) => setForm({ ...form, modelo: v })}
+      />
+
+      <Text style={styles.label}>URL da Imagem</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="https://..."
+        placeholderTextColor="#666"
+        value={form.imageUrl}
+        onChangeText={(v) => setForm({ ...form, imageUrl: v })}
+        autoCapitalize="none"
       />
 
       <Text style={styles.label}>Tipo</Text>
