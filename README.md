@@ -7,7 +7,7 @@ App mobile desenvolvido com **React Native + Expo** para gerenciamento de carros
 ## 📋 Pré-requisitos
 
 - Node.js instalado
-- Expo Go instalado no celular
+- Expo Go instalado no celular (SDK 56)
 
 ---
 
@@ -31,13 +31,15 @@ App mobile desenvolvido com **React Native + Expo** para gerenciamento de carros
 
 ## ⚙️ Configuração da API
 
-No arquivo `service/api.js`, troque o IP pelo do seu computador:
+O app já está configurado para consumir o backend em produção.
 
-```js
-const BASE_URL = "http://SEU_IP_AQUI:3000/api";
-```
+No arquivo `service/api.js`:
 
-> 💡 Para descobrir seu IP: rode `ipconfig` no terminal e copie o **Endereço IPv4**
+const BASE_URL = "https://carrosappbackend.onrender.com/api";
+
+> Para rodar localmente, troque pela URL:
+> http://SEU_IP_LOCAL:3000/api
+> 💡 Descubra seu IP com `ipconfig` no terminal
 
 ---
 
@@ -53,6 +55,7 @@ CarrosApp/
 
 ---
 
-## 🔗 Backend
+## 🔗 Links
 
-Repositório do backend: _link aqui após criar_
+- **Backend (API):** https://github.com/Otavio322/CarrosAppBackend
+- **Deploy backend:** https://carrosappbackend.onrender.com
