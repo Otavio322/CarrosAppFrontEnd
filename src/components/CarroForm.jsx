@@ -82,7 +82,7 @@ export default function CarroForm({ onSalvar, carroEditando, onCancelar }) {
         ))}
       </View>
 
-      <TouchableOpacity style={styles.btnSalvar} onPress={() => onSalvar(form)}>
+      <TouchableOpacity style={styles.btnSalvar} onPress={() => {onSalvar(form); setForm(EMPTY);}}>
         <Text style={styles.btnSalvarText}>
           {carroEditando ? "Salvar Alterações" : "Cadastrar"}
         </Text>
