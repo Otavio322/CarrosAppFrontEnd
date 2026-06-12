@@ -10,11 +10,17 @@ import {
 import CarroCard from "../../src/components/CarroCard";
 import CarroForm from "../../src/components/CarroForm";
 
-export default function HomeScreen() {
-  const [carros, setCarros] = useState([]);
-  const [carroEditando, setCarroEditando] = useState(null);
+type Carro = {
+  id: string;
+  nome: string;
+  modelo: string;
+};
 
-  const handleSalvar = (form) => {
+export default function HomeScreen() {
+  const [carros, setCarros] = useState<Carro[]>([]);
+  const [carroEditando, setCarroEditando] = useState<Carro | null>(null);
+
+  const handleSalvar = (form: Omit<Carro, "id">) => {
     if (!form.nome || !form.modelo) {
       Alert.alert("Atenção", "Preencha o nome e o modelo do carro.");
       return;
@@ -32,11 +38,16 @@ export default function HomeScreen() {
     }
   };
 
-  const handleEditar = (carro) => setCarroEditando(carro);
+  const handleEditar = (carro: Carro) => {
+    setCarroEditando(carro);
+  };
 
-  const handleDeletar = (carro) => {
+  const handleDeletar = (carro: Carro) => {
     Alert.alert("Excluir", `Deseja excluir "${carro.nome}"?`, [
-      { text: "Cancelar", style: "cancel" },
+      {
+        text: "Cancelar",
+        style: "cancel",
+      },
       {
         text: "Excluir",
         style: "destructive",
@@ -85,7 +96,10 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#0F1117" },
+  container: {
+    flex: 1,
+    backgroundColor: "#0F1117",
+  },
   header: {
     backgroundColor: "#E63946",
     paddingTop: 50,
@@ -95,10 +109,28 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
-  headerTitle: { color: "#fff", fontSize: 22, fontWeight: "800" },
-  headerSub: { color: "rgba(255,255,255,0.75)", fontSize: 13 },
-  lista: { padding: 16 },
-  empty: { alignItems: "center", marginTop: 30 },
-  emptyIcon: { fontSize: 48, marginBottom: 10 },
-  emptyText: { color: "#555", fontSize: 14 },
+  headerTitle: {
+    color: "#fff",
+    fontSize: 22,
+    fontWeight: "800",
+  },
+  headerSub: {
+    color: "rgba(255,255,255,0.75)",
+    fontSize: 13,
+  },
+  lista: {
+    padding: 16,
+  },
+  empty: {
+    alignItems: "center",
+    marginTop: 30,
+  },
+  emptyIcon: {
+    fontSize: 48,
+    marginBottom: 10,
+  },
+  emptyText: {
+    color: "#555",
+    fontSize: 14,
+  },
 });
