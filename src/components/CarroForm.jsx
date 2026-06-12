@@ -15,7 +15,7 @@ const TIPO_LABEL = {
   diesel: "🛢️ Diesel",
   hibrido: "⛽ + ⚡ Híbrido"
 };
-const EMPTY = { nome: "", modelo: "", tipo: "gasolina", iamgeURl: "" };
+const EMPTY = { nome: "", ano: "", marca: "", tipo: "gasolina", imageUrl: "" };
 
 export default function CarroForm({ onSalvar, carroEditando, onCancelar }) {
   const [form, setForm] = useState(EMPTY);
@@ -40,13 +40,24 @@ export default function CarroForm({ onSalvar, carroEditando, onCancelar }) {
         onChangeText={(v) => setForm({ ...form, nome: v })}
       />
 
-      <Text style={styles.label}>Modelo</Text>
+      <Text style={styles.label}>Ano</Text>
       <TextInput
         style={styles.input}
         placeholder="Ex: EXL 2024"
         placeholderTextColor="#666"
-        value={form.modelo}
-        onChangeText={(v) => setForm({ ...form, modelo: v })}
+        value={form.ano}
+        onChangeText={(v) => setForm({ ...form, ano: v.replace(/[^0-9]/g, "") })}
+        keyboardType="numeric"
+        maxLength={4}
+      />
+
+      <Text style={styles.label}>Marca</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Ex: Citroën"
+        placeholderTextColor="#666"
+        value={form.marca}
+        onChangeText={(v) => setForm({ ...form, marca: v })}
       />
 
       <Text style={styles.label}>URL da Imagem</Text>
@@ -82,7 +93,7 @@ export default function CarroForm({ onSalvar, carroEditando, onCancelar }) {
         ))}
       </View>
 
-      <TouchableOpacity style={styles.btnSalvar} onPress={() => {onSalvar(form); setForm(EMPTY);}}>
+      <TouchableOpacity style={styles.btnSalvar} onPress={() => {onSalvar(form)}}>
         <Text style={styles.btnSalvarText}>
           {carroEditando ? "Salvar Alterações" : "Cadastrar"}
         </Text>

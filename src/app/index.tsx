@@ -22,6 +22,7 @@ type Carro = {
 export default function HomeScreen() {
   const [carros, setCarros] = useState<Carro[]>([]);
   const [carroEditando, setCarroEditando] = useState<Carro | null>(null);
+  const [resetKey, setResetKey] = useState(0);
 
   const carregar = async () => {
     try {
@@ -49,6 +50,7 @@ export default function HomeScreen() {
         await carroService.criar(form);
       }
       await carregar();
+      setResetKey((k) => k + 1);
     } catch {
       Alert.alert("Erro", "Não foi possível salvar o carro.");
     }
@@ -89,6 +91,7 @@ export default function HomeScreen() {
         contentContainerStyle={styles.lista}
         ListHeaderComponent={
           <CarroForm
+            key={carroEditando?._id ?? resetKey}
             onSalvar={handleSalvar}
             carroEditando={carroEditando}
             onCancelar={() => setCarroEditando(null)}

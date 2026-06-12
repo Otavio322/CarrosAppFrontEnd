@@ -27,7 +27,7 @@ export default function CarroCard({ carro, onEditar, onDeletar }) {
 
       <View style={styles.info}>
         <Text style={styles.nome}>{carro.nome}</Text>
-        <Text style={styles.modelo}>{carro.modelo}</Text>
+        <Text style={styles.marcaAno}>{carro.marca} · {carro.ano}</Text>
         <View style={[styles.badge, { backgroundColor: tipo.cor }]}>
           <Text style={styles.badgeText}>{tipo.label}</Text>
         </View>
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   placeholderIcon: { fontSize: 30 },
   info: { flex: 1 },
   nome: { color: "#fff", fontSize: 17, fontWeight: "700" },
-  modelo: { color: "#aaa", fontSize: 13, marginTop: 2 },
+  marcaAno: { color: "#aaa", fontSize: 13, marginTop: 2 },
   badge: {
     alignSelf: "flex-start",
     borderRadius: 20,
